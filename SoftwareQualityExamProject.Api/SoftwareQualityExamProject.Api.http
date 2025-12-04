@@ -1,0 +1,6 @@
+@SoftwareQualityExamProject.Api_HostAddress = http://localhost:5199
+
+GET {{SoftwareQualityExamProject.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
