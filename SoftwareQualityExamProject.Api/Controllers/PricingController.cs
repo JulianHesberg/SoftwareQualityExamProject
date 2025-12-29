@@ -20,7 +20,7 @@ public class PricingController : ControllerBase
     }
 
     [HttpGet("calculate")]
-    public IActionResult CalculatePrice([FromQuery] string couponCode,
+    public IActionResult CalculatePrice([FromQuery] string? couponCode,
         [FromQuery] double basePrice,
         [FromQuery] bool isPremium)
     {
