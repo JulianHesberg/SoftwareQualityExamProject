@@ -16,8 +16,6 @@ public class PricingSteps
 {
     private readonly PricingTestContext _ctx;
 
-    // Your controller currently expects the query param name "couponCode".
-    // We keep that only as a technical detail; tests avoid using "couponCode" as a concept.
     private const string CouponQueryParamName = "couponCode";
 
     public PricingSteps(PricingTestContext ctx)
@@ -46,7 +44,6 @@ public class PricingSteps
     [Given("coupon lookup returns a coupon")]
     public void GivenCouponLookupReturnsACoupon()
     {
-        // Coupon model has no CouponCode property; only set required members
         var coupon = new Coupon
         {
             Id = "TEST-1",
@@ -116,8 +113,6 @@ public class PricingSteps
     {
         _ctx.Client.Should().NotBeNull();
 
-        // Always include the coupon query parameter (even if empty/whitespace),
-        // otherwise binding can fail and produce 400.
         var couponInput = _ctx.CouponInput ?? "";
 
         var url =
