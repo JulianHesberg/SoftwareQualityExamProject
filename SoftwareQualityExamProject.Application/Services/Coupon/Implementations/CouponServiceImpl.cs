@@ -1,12 +1,20 @@
 ﻿using System.Text.Json;
 using SoftwareQualityExamProject.Application.Exceptions;
 using SoftwareQualityExamProject.Application.Services.Coupon.Interfaces;
+using SoftwareQualityExamProject.Application.Services.FileReader;
 using ApplicationException = System.ApplicationException;
 
 namespace SoftwareQualityExamProject.Application.Services.Coupon.Implementations;
 
 public class CouponServiceImpl : ICouponService
 {
+    private readonly IFileReader _fileReader;
+
+    public CouponServiceImpl(IFileReader fileReader)
+    {
+        _fileReader = fileReader;
+    }
+    
     public bool IsCouponValid(Models.Coupon coupon, DateTime currentDate)
     {
         var now = DateTime.Now;
@@ -26,7 +34,7 @@ public class CouponServiceImpl : ICouponService
                 PropertyNameCaseInsensitive = true
             };
 
-            var json = File.ReadAllText("coupons.json");
+            var json = _fileReader.ReadAllText("coupons.json");
             coupons = System.Text.Json.JsonSerializer.Deserialize<List<Models.Coupon>>(json, options);
         }
         catch (Exception e)
